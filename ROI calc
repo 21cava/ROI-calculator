@@ -1,0 +1,31 @@
+#Return on investment calculator
+
+import yfinance as yf
+
+#Ticker input
+ticker_input = input("Ticker simbol:")
+ticker = yf.Ticker(ticker_input)
+
+#Purchase input
+purchase_price = float(input("Purchase price:"))
+
+#History data
+buy_date = input("Buy date (YYYY-MM-DD):")
+hist = ticker.history(start=buy_date)
+
+#Calculations 
+buy_price = hist['Close'][0]
+current_price = hist['Close'][-1]
+stock = purchase_price / buy_price
+current_value = stock * current_price
+
+#Results
+profit = current_value - purchase_price
+roi = (profit / purchase_price) * 100
+
+#Print results
+print("-----------------------------")
+print(f"Current value: ${current_value:.2f}")
+print(f"Profit: ${profit:.2f}")
+print(f"ROI: {roi:.2f}%")
+print("-----------------------------")
